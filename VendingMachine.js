@@ -2,10 +2,10 @@
 class VendingMachine {
   constructor() {
     this.till = {
-      10: 0,
-      50: 0,
-      100: 0,
-      500: 0,
+      10: 10,
+      50: 10,
+      100: 10,
+      500: 10,
     };
     this.balance = 0;
     this.row;
@@ -33,6 +33,13 @@ class VendingMachine {
       [this.tea1, this.tea2, this.tea3, this.tea4],
       [this.water1, this.water2, this.water3, this.water4],
     ];
+
+    this.change = {
+      ten: 0,
+      fifty: 0,
+      hundred: 0,
+      fivehundred: 0,
+    };
   }
   insertCoin(denomination) {
     this.balance += denomination;
@@ -41,6 +48,24 @@ class VendingMachine {
   }
   changeReturn(price) {
     this.balance -= price;
+    let amount = this.balance;
+    console.log(amount);
+    while (amount != 0) {
+      if (amount - 500 >= 0) {
+        this.change.fivehundred += 1;
+        amount -= 500;
+      } else if (amount - 100 >= 0) {
+        this.change.hundred += 1;
+        amount -= 100;
+      } else if (amount - 50 >= 0) {
+        this.change.fifty += 1;
+        amount -= 50;
+      } else if (amount - 10 <= 0) {
+        this.change.ten += 1;
+        amount -= 10;
+      }
+    }
+    console.log(JSON.stringify(this.change));
   }
   pressButton(input) {
     if (typeof input === "string") {

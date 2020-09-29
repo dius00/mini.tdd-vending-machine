@@ -48,10 +48,10 @@ describe("vending machine", () => {
       machine.pressButton(1);
 
       expect(machine.change).to.deep.equal({
-        10: 0,
-        50: 1,
-        100: 1,
-        500: 0,
+        ten: 0,
+        fifty: 1,
+        hundred: 1,
+        fivehundred: 0,
       });
     });
   });
