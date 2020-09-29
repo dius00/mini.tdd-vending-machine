@@ -49,12 +49,12 @@ class VendingMachine {
       this.column = input;
       console.log(`${this.row}${this.column}`);
       const rowChooser = { A: 0, B: 1, C: 2, D: 3 };
-      console.log(this.inventory[rowChooser[this.row]][this.column]);
-      console.log(rowChooser[this.row], this.column);
-      this.inventory[rowChooser[this.row]][this.column - 1].count--;
-      this.changeReturn(
-        this.inventory[rowChooser[this.row]][this.column - 1].price
-      );
+      let item = this.inventory[rowChooser[this.row]][this.column - 1];
+      if (item.count === 0) {
+        return "Error!";
+      }
+      item.count--;
+      this.changeReturn(item.price);
     }
   }
 }

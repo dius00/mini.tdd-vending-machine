@@ -64,6 +64,15 @@ describe("vending machine", () => {
       machine.pressButton(1);
       expect(machine.coffee1.count).to.equal(4);
     });
+    it("should throw an error if item is not in stock", () => {
+      const machine = new VendingMachine();
+      for (let i = 0; i < 5; i++) {
+        machine.pressButton("A");
+        machine.pressButton(1);
+      }
+      machine.pressButton("A");
+      expect(machine.pressButton(1)).to.equal("Error!");
+    });
   });
   describe("inventory", () => {
     it("should have property inventory", () => {
