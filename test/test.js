@@ -41,6 +41,7 @@ describe("vending machine", () => {
     });
     it("should save and print the column", () => {
       const machine = new VendingMachine();
+      machine.pressButton("A");
       machine.pressButton(1);
       expect(machine.column).to.equal(1);
     });

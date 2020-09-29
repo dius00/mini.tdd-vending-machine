@@ -14,10 +14,10 @@ class VendingMachine {
     this.juice2 = { name: `Apple Juice`, price: 350, count: 5 };
     this.juice3 = { name: `Apple Juice`, price: 350, count: 5 };
     this.juice4 = { name: `Apple Juice`, price: 350, count: 5 };
-    this.coffee1 = { name: `Coffe1`, price: 350, count: 5 };
-    this.coffee2 = { name: `Coffe1`, price: 350, count: 5 };
-    this.coffee3 = { name: `Coffe1`, price: 350, count: 5 };
-    this.coffee4 = { name: `Coffe1`, price: 350, count: 5 };
+    this.coffee1 = { name: `Coffee1`, price: 350, count: 5 };
+    this.coffee2 = { name: `Coffee1`, price: 350, count: 5 };
+    this.coffee3 = { name: `Coffee1`, price: 350, count: 5 };
+    this.coffee4 = { name: `Coffee1`, price: 350, count: 5 };
     this.tea1 = { name: `Tea`, price: 350, count: 5 };
     this.tea2 = { name: `Tea`, price: 350, count: 5 };
     this.tea3 = { name: `Tea`, price: 350, count: 5 };
@@ -48,7 +48,7 @@ class VendingMachine {
       const rowChooser = { A: 0, B: 1, C: 2, D: 3 };
       console.log(this.inventory[rowChooser[this.row]][this.column]);
       console.log(rowChooser[this.row], this.column);
-      this.inventory[rowChooser[this.row]][this.column].count--;
+      this.inventory[rowChooser[this.row]][this.column - 1].count--;
     }
   }
 }
