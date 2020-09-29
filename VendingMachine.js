@@ -36,6 +36,7 @@ class VendingMachine {
   }
   insertCoin(denomination) {
     this.balance += denomination;
+    this.till[denomination] += 1;
     return this.balance;
   }
   changeReturn(price) {

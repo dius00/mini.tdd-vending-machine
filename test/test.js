@@ -73,6 +73,11 @@ describe("vending machine", () => {
       machine.pressButton("A");
       expect(machine.pressButton(1)).to.equal("Error!");
     });
+    it("should throw an error if you can't afford it", () => {
+      const machine = new VendingMachine();
+      machine.pressButton("A");
+      expect(machine.pressButton(1)).to.equal("Insufficient credit!");
+    });
   });
   describe("inventory", () => {
     it("should have property inventory", () => {
