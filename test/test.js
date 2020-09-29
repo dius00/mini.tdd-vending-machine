@@ -29,6 +29,19 @@ describe("vending machine", () => {
       expect(machine.balance).to.equal(100);
     });
   });
+  describe("changeReturn", () => {
+    it("should have method changeReturn", () => {
+      const machine = new VendingMachine();
+      expect(typeof machine.changeReturn).to.equal("function");
+    });
+    it("should return correct change", () => {
+      const machine = new VendingMachine();
+      machine.insertCoin(500);
+      machine.pressButton("A");
+      machine.pressButton(1);
+      expect(machine.balance).to.equal(150);
+    });
+  });
   describe("pressButton", () => {
     it("should have method pressButton", () => {
       const machine = new VendingMachine();

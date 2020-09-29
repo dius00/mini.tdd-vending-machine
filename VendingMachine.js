@@ -38,6 +38,9 @@ class VendingMachine {
     this.balance += denomination;
     return this.balance;
   }
+  changeReturn(price) {
+    this.balance -= price;
+  }
   pressButton(input) {
     if (typeof input === "string") {
       this.row = input;
@@ -49,6 +52,9 @@ class VendingMachine {
       console.log(this.inventory[rowChooser[this.row]][this.column]);
       console.log(rowChooser[this.row], this.column);
       this.inventory[rowChooser[this.row]][this.column - 1].count--;
+      this.changeReturn(
+        this.inventory[rowChooser[this.row]][this.column - 1].price
+      );
     }
   }
 }
