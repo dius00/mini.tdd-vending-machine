@@ -78,6 +78,12 @@ describe("vending machine", () => {
       machine.pressButton("A");
       expect(machine.pressButton(1)).to.equal("Insufficient credit!");
     });
+    it("should return the name of the item selected", () => {
+      const machine = new VendingMachine();
+      machine.insertCoin(500);
+      machine.pressButton("A");
+      expect(machine.pressButton(1)).to.equal("Coffee1");
+    });
   });
   describe("inventory", () => {
     it("should have property inventory", () => {

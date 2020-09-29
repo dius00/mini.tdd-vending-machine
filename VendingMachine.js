@@ -57,6 +57,7 @@ class VendingMachine {
       item.count--;
       if (item.price > this.balance) return "Insufficient credit!";
       this.changeReturn(item.price);
+      return `${item.name}`;
     }
   }
 }
