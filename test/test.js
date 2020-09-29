@@ -12,10 +12,10 @@ describe("vending machine", () => {
 
       // Assert
       expect(machine.till).to.deep.equal({
-        10: 0,
-        50: 0,
-        100: 0,
-        500: 1,
+        10: 10,
+        50: 10,
+        100: 10,
+        500: 11,
       });
       expect(machine.balance).to.equal(500); // Use an ES6 getter
     });
@@ -34,12 +34,25 @@ describe("vending machine", () => {
       const machine = new VendingMachine();
       expect(typeof machine.changeReturn).to.equal("function");
     });
-    it("should return correct change", () => {
+    it("should return correct change balance", () => {
       const machine = new VendingMachine();
       machine.insertCoin(500);
       machine.pressButton("A");
       machine.pressButton(1);
       expect(machine.balance).to.equal(150);
+    });
+    it("should return change coins (type and number) correctly", () => {
+      const machine = new VendingMachine();
+      machine.insertCoin(500);
+      machine.pressButton("A");
+      machine.pressButton(1);
+
+      expect(machine.change).to.deep.equal({
+        10: 0,
+        50: 1,
+        100: 1,
+        500: 0,
+      });
     });
   });
   describe("pressButton", () => {
