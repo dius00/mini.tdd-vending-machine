@@ -10,22 +10,22 @@ class VendingMachine {
     this.balance = 0;
     this.row;
     this.column;
-    this.juice1 = { name: `Apple Juice`, price: 350, count: 5 };
-    this.juice2 = { name: `Apple Juice`, price: 350, count: 5 };
-    this.juice3 = { name: `Apple Juice`, price: 350, count: 5 };
-    this.juice4 = { name: `Apple Juice`, price: 350, count: 5 };
-    this.coffee1 = { name: `Coffee1`, price: 350, count: 5 };
-    this.coffee2 = { name: `Coffee1`, price: 350, count: 5 };
-    this.coffee3 = { name: `Coffee1`, price: 350, count: 5 };
-    this.coffee4 = { name: `Coffee1`, price: 350, count: 5 };
-    this.tea1 = { name: `Tea`, price: 350, count: 5 };
-    this.tea2 = { name: `Tea`, price: 350, count: 5 };
-    this.tea3 = { name: `Tea`, price: 350, count: 5 };
-    this.tea4 = { name: `Tea`, price: 350, count: 5 };
-    this.water1 = { name: `Apple Juice`, price: 350, count: 5 };
-    this.water2 = { name: `Apple Juice`, price: 350, count: 5 };
-    this.water3 = { name: `Apple Juice`, price: 350, count: 5 };
-    this.water4 = { name: `Apple Juice`, price: 350, count: 5 };
+    this.coffee1 = { name: `Regular Coffee`, price: 150, count: 6 };
+    this.coffee2 = { name: `Decaf Coffee`, price: 200, count: 5 };
+    this.coffee3 = { name: `Latte`, price: 300, count: 2 };
+    this.coffee4 = { name: `Espresso`, price: 230, count: 4 };
+    this.juice1 = { name: `Apple Juice`, price: 350, count: 3 };
+    this.juice2 = { name: `Peach Juice`, price: 350, count: 4 };
+    this.juice3 = { name: `Pear Juice`, price: 350, count: 5 };
+    this.juice4 = { name: `Mango Juice`, price: 450, count: 1 };
+    this.tea1 = { name: `Black Tea`, price: 250, count: 5 };
+    this.tea2 = { name: `Green Tea`, price: 250, count: 5 };
+    this.tea3 = { name: `Matcha Tea`, price: 330, count: 5 };
+    this.tea4 = { name: `Soba Tea`, price: 250, count: 5 };
+    this.water1 = { name: `Water`, price: 100, count: 5 };
+    this.water2 = { name: `Sparkling Water`, price: 130, count: 5 };
+    this.water3 = { name: `Fancy Water`, price: 500, count: 5 };
+    this.water4 = { name: `Energy Drink`, price: 600, count: 5 };
 
     this.inventory = [
       [this.coffee1, this.coffee2, this.coffee3, this.coffee4],
@@ -35,10 +35,10 @@ class VendingMachine {
     ];
 
     this.change = {
-      ten: 0,
-      fifty: 0,
-      hundred: 0,
-      fivehundred: 0,
+      10: 0,
+      50: 0,
+      100: 0,
+      500: 0,
     };
   }
   insertCoin(denomination) {
@@ -52,20 +52,26 @@ class VendingMachine {
     console.log(amount);
     while (amount != 0) {
       if (amount - 500 >= 0) {
-        this.change.fivehundred += 1;
+        this.change[500] += 1;
         amount -= 500;
       } else if (amount - 100 >= 0) {
-        this.change.hundred += 1;
+        this.change[100] += 1;
         amount -= 100;
       } else if (amount - 50 >= 0) {
-        this.change.fifty += 1;
+        this.change[50] += 1;
         amount -= 50;
       } else if (amount - 10 <= 0) {
-        this.change.ten += 1;
+        this.change[10] += 1;
         amount -= 10;
       }
     }
-    console.log(JSON.stringify(this.change));
+    console.log(
+      JSON.stringify(this.change)
+        .replace(/["]/gm, "")
+        .replace(/[:]/gm, ": ")
+        .replace(/[,]/gm, ", ")
+        .slice(1, -1)
+    );
   }
   pressButton(input) {
     if (typeof input === "string") {
@@ -77,12 +83,14 @@ class VendingMachine {
       const rowChooser = { A: 0, B: 1, C: 2, D: 3 };
       let item = this.inventory[rowChooser[this.row]][this.column - 1];
       if (item.count === 0) {
-        return "Error!";
+        console.log("Error!");
       }
       item.count--;
-      if (item.price > this.balance) return "Insufficient credit!";
-      this.changeReturn(item.price);
-      return `${item.name}`;
+      if (item.price > this.balance) console.log("Insufficient credit!");
+      else {
+        this.changeReturn(item.price);
+        console.log(item.name);
+      }
     }
   }
 }
